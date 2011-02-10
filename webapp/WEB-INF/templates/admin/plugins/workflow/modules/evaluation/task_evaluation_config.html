@@ -1,0 +1,252 @@
+  		<h3>#i18n{module.workflow.evaluation.task_evaluation_config.title}</h3>
+  		
+  		<p>
+	    	<label for="task_title">#i18n{module.workflow.evaluation.task_evaluation_config.label_task_title} * :</label>
+		    	<#if config?exists&&config.taskTitle?exists>
+		     			  <input type="text" name="task_title" id="" size="80" value="${config.taskTitle}"  maxlength="255"/>
+		     	<#else>
+		     			<input type="text" name="task_title" id="" size="80" value=""  maxlength="255"/>
+		     	</#if>	
+	 	</p>
+	 	<p>
+	   		<label for="task_description">#i18n{module.workflow.evaluation.task_evaluation_config.label_task_description} * :</label>
+	    	<#if config?exists&&config.taskDescription?exists>
+	    		<textarea name="task_description"  rows="4" cols="80">${config.taskDescription}</textarea>
+	    	<#else>
+		    	<textarea name="task_description"  rows="4" cols="80"></textarea>
+		    </#if>
+		</p>
+	  	<p>
+	    	<label for="summary_title">#i18n{module.workflow.evaluation.task_evaluation_config.label_summary_title} :</label>
+		    	<#if config?exists&&config.summaryTitle?exists>
+		     			  <input type="text" name="summary_title" id="" size="80" value="${config.summaryTitle}"  maxlength="255"/>
+		     	<#else>
+		     			<input type="text" name="summary_title" id="" size="80" value=""  maxlength="255"/>
+		     	</#if>	
+		     	</p>
+	 	<p>
+			 <label for="mandatory_summary">#i18n{module.workflow.evaluation.task_evaluation_config.label_mandatory_summary} :</label>
+   		 		<#if config?exists&&config.mandatorySummary>
+   		 			<input name="mandatory_summary" value="1" type="checkbox" checked="checked">
+   		 		<#else>
+   		 			<input name="mandatory_summary" value="1" type="checkbox">
+   		 		</#if>
+	 	</p>
+	 	<div class="highlight-box">
+		  <h2> 
+		  <a href="javascript:displayId('notes')"><img alt="#i18n{module.workflow.evaluation.task_evaluation_config.label_open}" src="images/admin/skin/open_block.gif"></a>
+		  <a href="javascript:hideId('notes')"><img alt="#i18n{module.workflow.evaluation.task_evaluation_config.label_close}" src="images/admin/skin/closed_block.gif"></a>
+		  #i18n{module.workflow.evaluation.task_evaluation_config.label_notation}</h2>
+		  <div id="notes">
+		  <p>
+		  	<label for="use_notation">#i18n{module.workflow.evaluation.task_evaluation_config.label_use_notation}</label>
+		  		<#if config?exists && config.finalNoteTitle?has_content>
+		  		<input type="checkbox" name="use_notation" id="use_notation" checked="checked"/>
+		  		<#else>
+		  		<input type="checkbox" name="use_notation" id="use_notation" />
+		  		</#if>
+		  	<br/>
+		  </p>
+	 	<p>
+	    	<label for="final_note_title">#i18n{module.workflow.evaluation.task_evaluation_config.label_final_note_title} * :</label>
+		    	<#if config?exists&&config.finalNoteTitle?exists>
+		     			  <input type="text" name="final_note_title" id="" size="80" value="${config.finalNoteTitle}"  maxlength="255"/>
+		     	<#else>
+		     			<input type="text" name="final_note_title" id="" size="80" value=""  maxlength="255"/>
+		     	</#if>
+		</p>
+		<p>
+ 			<label  for="automatic_final_note">	#i18n{module.workflow.evaluation.task_evaluation_config.label_finale_note_type} :</label>
+	    	<#if config?exists&&config.automaticFinalNote>
+   		 			<input name="automatic_final_note" value="1" type="checkbox" checked="checked" onclick="javascript:automatic_note();">
+   		 		<#else>
+   		 			<input name="automatic_final_note" value="1" type="checkbox" onclick="javascript:automatic_note();">
+   		 		</#if>
+	    	
+ 		</p>
+ 		<div id="is_not_auto">
+	 		<p>
+				 <label for="final_note_mandatory">#i18n{module.workflow.evaluation.task_evaluation_config.label_final_note_mandatory} :</label>
+	   		 		<#if config?exists&&config.mandatoryFinalNote>
+	   		 			<input name="final_note_mandatory" value="1" type="checkbox" checked="checked">
+	   		 		<#else>
+	   		 			<input name="final_note_mandatory" value="1" type="checkbox">
+	   		 		</#if>
+		 	</p>
+	 		<p>
+			    	<label for="best_score_final_note">#i18n{module.workflow.evaluation.task_evaluation_config.label_best_score_final_note} * :</label>
+				    	<#if config?exists&&config.bestScoreFinalNote?exists>
+				     			  <input type="text" name="best_score_final_note" id="" size="3" value="${config.bestScoreFinalNote}"  maxlength="3"/>
+				     	<#else>
+				     			<input type="text" name="best_score_final_note" id="" size="3" value=""  maxlength="3"/>
+				     	</#if>		
+			</p>
+	 	</div>		
+	 	<br>
+	 	
+	 	<table>
+	  		<tr>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_number}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_criteria_checked}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_criteria_title}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_manadatory_criteria}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_criteria_best_score}</th>
+	  		</tr>
+		 	<#list config.evaluationsCriteria as criteria>
+			  	
+			  	<tr>
+			  		<td>
+			  			<input name="id_criteria_${criteria_index+1}" type="hidden" value="${criteria.idCriteria}">
+			  			${criteria_index+1}
+			  		</td>
+			  		
+			  		<td>
+			  			<#if criteria.idCriteria!=-1>
+   		 					<input name="criterias_checked" value="${criteria_index+1}" type="checkbox" checked="checked">
+   		 				<#else>
+   		 					<input name="criterias_checked" value="${criteria_index+1}" type="checkbox">
+   		 				</#if>
+			  		
+				  	</td>	
+				  		
+				     <td> 	
+				      	<#if criteria.title?has_content>
+					     		 <input type="text" name="criteria_title_${criteria_index+1}" id="" size="80" value="${criteria.title}"  maxlength="255"/>
+					     <#else>
+					     		<input type="text" name="criteria_title_${criteria_index+1}" id="" size="80" value=""  maxlength="255"/>
+					     </#if>	
+					  </td>   
+					  <td> 
+							
+							<#if criteria.title?has_content&&criteria.mandatory>
+			   		 			<input name="mandatory_criteria_${criteria_index+1}" value="1" type="checkbox" checked="checked">
+			   		 		<#else>
+			   		 			<input name="mandatory_criteria_${criteria_index+1}" value="1" type="checkbox">
+			   		 		</#if>
+			   		 	</td>	
+				 		<td> 
+			    		
+			    		 <#if criteria.bestScore?has_content>
+				     			  <input type="text" name="criteria_best_score_${criteria_index+1}" id="" size="3" value="${criteria.bestScore}"  maxlength="3"/>
+				     	<#else>
+				     			<input type="text" name="criteria_best_score_${criteria_index+1}" id="" size="3" value=""  maxlength="3"/>
+				     	</#if>		
+					</td>	
+					
+				</tr>
+			</#list>
+	 </table>
+	 </div>
+</div>
+<div class="highlight-box">
+		 
+	  <h2> 
+		  <a href="javascript:displayId('synthesis')"><img alt="#i18n{module.workflow.evaluation.task_evaluation_config.label_open}" src="images/admin/skin/open_block.gif"></a>
+		  <a href="javascript:hideId('synthesis')"><img alt="#i18n{module.workflow.evaluation.task_evaluation_config.label_close}" src="images/admin/skin/closed_block.gif"></a>
+		  
+		  #i18n{module.workflow.evaluation.task_evaluation_config.label_synthesis_criteria_title}</h2>
+	  <div id="synthesis">
+	 <table>
+	  		<tr>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_number}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_criteria_title}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_manadatory_criteria}</th>
+	  			<th>#i18n{module.workflow.evaluation.task_evaluation_config.row_criteria_type}</th>
+	  			<th>&nbsp;</th>
+	  		</tr>
+		 	<#list config.listSynthesisCriteria as criteria>
+			  	
+			  	<tr>
+			  		<td>
+			  			<input type="hidden" name="synthesis_criterias" value="${criteria_index+1}"/>
+			  			<input name="id_synthesis_criteria_${criteria_index+1}" type="hidden" value="${criteria.idCriteria}">
+			  			${criteria_index+1}
+			  		</td>
+				  		
+				     <td> 	
+				      	<#if criteria.title?has_content>
+					     		 <input type="text" name="synthesis_criterias_title_${criteria_index+1}" id="" size="80" value="${criteria.title}"  maxlength="255"/>
+					     <#else>
+					     		<input type="text" name="synthesis_criterias_title_${criteria_index+1}" id="" size="80" value=""  maxlength="255"/>
+					     </#if>	
+					  </td>
+					  <td>
+					  		<#if criteria.title?has_content&&criteria.mandatory>
+			   		 			<input name="synthesis_mandatory_criteria_${criteria_index+1}" value="1" type="checkbox" checked="checked">
+			   		 		<#else>
+			   		 			<input name="synthesis_mandatory_criteria_${criteria_index+1}" value="1" type="checkbox">
+			   		 		</#if>
+					  </td>
+					  <td>
+					  	<#if criteria.type?has_content>
+					  		<@combo name="criteria_type_${criteria_index+1}" default_value="${criteria.type?string}" items=types_list />
+					  	<#else>
+					  		<@combo name="criteria_type_${criteria_index+1}" default_value="" items=types_list />
+					  	</#if>
+			   		</td>
+			   		<td>
+			   			<input class="button" style="display:none;" name="buttons_manage_values" type="button" value="#i18n{module.workflow.evaluation.task_evaluation_config.label_manage_values}" 
+			   					onclick="showTR('criteria_values_${criteria_index+1}'); showTR('criteria_new_values_${criteria_index+1}'); this.style.display='none';" />
+			   		</td>
+				</tr>
+				<#assign value_index = 0 />
+				<#-- existing values -->
+				<#if criteria.availableValues?has_content && criteria.availableValues?size &gt; 0>
+				<tr id="criteria_values_${criteria_index+1}">
+					<td colspan="5">
+				 		<span style="font-weight:bold;">#i18n{module.workflow.evaluation.task_evaluation_config.values} : </span>
+				 		<#list criteria.availableValues as available_value>
+				 			<input type="hidden" value="${value_index}" name="${criteria_index+1}_synthesis_criterias_form_id" />
+				 			<input type="hidden" value="${available_value.value!}" name="${criteria_index+1}_synthesis_criterias_value_${value_index}" />
+				 			<input type="text" value="${available_value.title!}" name="${criteria_index+1}_synthesis_criterias_title_${value_index}" />&nbsp;
+				 			<#assign value_index = value_index + 1 />
+				 		</#list>
+					</td>
+				</tr>
+				</#if>
+				<#-- empty values -->
+				<tr id="criteria_new_values_${criteria_index+1}">
+					<td colspan="5">
+						<span style="font-weight:bold;">#i18n{module.workflow.evaluation.task_evaluation_config.addValues} : </span>
+						<#list create_values as available_value>
+				 			<input type="hidden" value="${value_index}" name="${criteria_index+1}_synthesis_criterias_form_id" />
+				 			<input type="hidden" value="${available_value.value!}" name="${criteria_index+1}_synthesis_criterias_value_${value_index}" />
+				 			<input type="text" value="${available_value.title!}" name="${criteria_index+1}_synthesis_criterias_title_${value_index}" />&nbsp;
+			 				<#assign value_index = value_index + 1 />
+			 			</#list>
+					</td>
+				</tr>
+			</#list>
+	 </table>
+	 </div>
+</div>
+	 
+<script type="text/javascript" charset="utf-8">
+function automatic_note()
+{
+	var x=document.getElementsByName("automatic_final_note");
+	if(x[0].checked)
+	{
+		document.getElementById("is_not_auto").style.display="none";
+	}
+	else
+	{
+		document.getElementById("is_not_auto").style.display="block";
+	}
+}
+automatic_note();
+
+$("input[name='buttons_manage_values']").show();
+$("tr[id^='criteria_values_']").hide();
+$("tr[id^='criteria_new_values_']").hide();
+
+function showTR( trID )
+{
+	if (document.getElementById && document.getElementById(trID) != null)
+	{
+		document.getElementById( trID ).style.display='';
+	}
+}
+
+</script>
+

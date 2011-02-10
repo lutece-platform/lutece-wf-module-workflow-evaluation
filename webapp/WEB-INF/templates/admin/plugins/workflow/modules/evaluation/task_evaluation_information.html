@@ -1,0 +1,56 @@
+<#if config?exists>
+ <table>
+	<tr>
+		<th width="20%">
+		</th>
+		<th width="80%">
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" style="text-align:center">
+			#i18n{module.workflow.evaluation.task_evaluation_expert_information.title}
+		</th>
+   </tr>
+   
+   
+   <#list criteria_list as criteria>
+	   <tr>
+			<td>
+				<#if   criteria.criteria_title?exists>
+					${criteria.criteria_title}
+				</#if>
+			 </td>
+			<td>
+				<#if   criteria.criteria_value?exists>
+					${criteria.criteria_value}
+				</#if>
+			</td>
+		</tr>
+	</#list>		
+	<tr>
+		<td>
+			<#if  config.summaryTitle?exists >
+				${config.summaryTitle}
+			</#if>
+		</td>
+		<td>
+			<#if evaluation.summary??>
+				${evaluation.summary}
+			</#if>
+		</td>
+	</tr>	
+	<tr>
+			<td>
+				<#if config.finalNoteTitle?exists>
+					${config.finalNoteTitle}
+				</#if>
+			</td>
+			<td>
+				<#if evaluation.finalNote?exists>
+					${evaluation.finalNote}
+				</#if>
+			</td>
+		</tr>	
+	
+ </table>
+</#if>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+ 	 <bean id="dossierInformationComplementaireDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.DossierInformationComplementaireDAO"/>
+ 	 <bean id="noteDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.NoteDAO"/>
+     <bean id="taskEvaluationConfigDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationConfigDAO"/>
+     <bean id="taskEvaluationCriteriaDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteriaDAO"/>
+     <bean id="evaluationDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.EvaluationDAO"/>
+     <bean id="evaluationCriteriaValueDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.EvaluationCriteriaValueDAO"/>
+     <bean id="workflow-evaluation.synthesisCriteriaValueDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.SynthesisCriteriaValueDAO" />
+     <bean id="workflow-evaluation.synthesisCriteriaDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.SynthesisCriteriaDAO" />
+     
+     <bean id="workflow-evaluation.taskEvaluation" class="fr.paris.lutece.plugins.workflow.business.task.TaskType" >
+     		<property name="key" value="taskEvaluation" />
+     		 <property name="titleI18nKey" value="module.workflow.evaluation.task_evaluation_title" />
+    		 <property name="className" value="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluation"/>
+   	  </bean>
+ </beans>
+ 	
