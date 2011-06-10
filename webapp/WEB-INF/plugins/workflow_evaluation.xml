@@ -2,7 +2,7 @@
     <!-- Plugin Informations -->
     <name>workflow-evaluation</name>
     <class>fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin</class>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <documentation/>
     <installation/>
     <changes/>
