@@ -44,8 +44,8 @@
   
   <properties>
         <componentName>Module Workflow Evaluation</componentName>
-        <jiraProjectName>WORKFLOW</jiraProjectName>
-        <jiraComponentId>10202</jiraComponentId>
+        <jiraProjectName>MODULEWORKFLOWEVALUATION</jiraProjectName>
+        <jiraComponentId>10379</jiraComponentId>
     </properties>
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-evaluation</connection>
