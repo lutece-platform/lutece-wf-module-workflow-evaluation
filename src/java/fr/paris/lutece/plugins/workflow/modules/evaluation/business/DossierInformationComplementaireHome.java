@@ -57,7 +57,7 @@ public final class DossierInformationComplementaireHome
     }
 
     /**
-         * Insere des informations complémentaires sur le dossier
+         * Insere des informations complÃ©mentaires sur le dossier
          * @param dossierInformationComplementaire information complementaire
          * @param plugin le pugin
          */
@@ -67,7 +67,7 @@ public final class DossierInformationComplementaireHome
     }
 
     /**
-         * Charge les informations complémentaires sur le dossier
+         * Charge les informations complÃ©mentaires sur le dossier
          * @param nId l'identifiant du dossier
          * @param plugin le plugin
          * @return les informations complementaires du dossier
