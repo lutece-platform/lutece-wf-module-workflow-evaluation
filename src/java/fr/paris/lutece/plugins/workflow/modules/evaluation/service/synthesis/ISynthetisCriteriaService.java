@@ -31,58 +31,68 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
 import fr.paris.lutece.portal.service.plugin.Plugin;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * ISynthetisCriteriaService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface ISynthetisCriteriaService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    /**
+     * Find a criteria
+     * @param nId the id
+     * @param plugin the plugin
+     * @return a criteria
+     */
+    SynthesisCriteria findByPrimaryKey( int nId, Plugin plugin );
 
     /**
+     * Create a new criteria
      * @param criteria the criteria
      * @param plugin the plugin
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void create( SynthesisCriteria criteria, Plugin plugin );
 
     /**
-     * @param nIdCriteria the id criteria
+     * Update a criteria
+     * @param criteria the criteria
      * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void update( SynthesisCriteria criteria, Plugin plugin );
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
+     * Select criteria from a given id task
      * @param nIdTask the id task
      * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     * @return a list of criteria
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    List<SynthesisCriteria> selectByIdTask( int nIdTask, Plugin plugin );
 
     /**
-     * Delete from a given id task
+     * Delete criteria from a given id task
      * @param nIdTask the id task
      * @param plugin the plugin
      */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void removeByIdTask( int nIdTask, Plugin plugin );
 
     /**
+     * Delete a criteria
      * @param nIdCriteria the id criteria
      * @param plugin the plugin
      */
-    void delete( int nIdCriteria, Plugin plugin );
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void remove( int nIdCriteria, Plugin plugin );
 }

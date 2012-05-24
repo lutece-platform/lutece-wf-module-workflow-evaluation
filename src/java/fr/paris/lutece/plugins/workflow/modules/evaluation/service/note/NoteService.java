@@ -31,58 +31,44 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.note;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.note.INoteDAO;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.note.Note;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * NoteService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public class NoteService implements INoteService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Inject
+    private INoteDAO _noteDAO;
+
+    // Finders
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
+     * {@inheritDoc}
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Override
+    public Note findByPrimaryKey( int nId, Plugin plugin )
+    {
+        return _noteDAO.load( nId, plugin );
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * {@inheritDoc}
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    @Override
+    public List<Note> getListNote( Plugin plugin )
+    {
+        return _noteDAO.selectNote( plugin );
+    }
 }

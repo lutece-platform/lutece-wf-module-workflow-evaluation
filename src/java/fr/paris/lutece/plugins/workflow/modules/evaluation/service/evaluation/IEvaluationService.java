@@ -31,58 +31,46 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.Evaluation;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * IEvaluationService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface IEvaluationService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    /**
+    * Create an instance of evaluation
+    * @param evaluation an instance of evaluation
+    * @param plugin the plugin
+    */
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void create( Evaluation evaluation, Plugin plugin );
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
+     * Delete an evaluation (with criterias)
+     * @param nIdHistory the history key
+     * @param nIdTask The task key
+     * @param plugin the Plugin
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void remove( int nIdHistory, int nIdTask, Plugin plugin );
+
+    // Finders
 
     /**
-     * @param nIdCriteria the id criteria
+     * Load an evaluation by history
+     * @param nIdHistory the history id
+     * @param nIdTask the task id
      * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * @return the Config Object
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    Evaluation findByPrimaryKey( int nIdHistory, int nIdTask, Plugin plugin );
 }

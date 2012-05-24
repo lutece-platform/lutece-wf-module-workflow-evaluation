@@ -39,7 +39,7 @@ import fr.paris.lutece.util.sql.DAOUtil;
 
 /**
  *
- *class   TaskCommentConfig
+ * TaskEvaluationConfigDAO
  *
  */
 public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
@@ -54,10 +54,10 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
         " WHERE id_task=?";
     private static final String SQL_QUERY_DELETE = "DELETE FROM task_evaluation_cf  WHERE id_task=? ";
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.ITaskEvaluationExpertConfigDAO#insert(fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.TaskEvaluationExpertConfig, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public synchronized void insert( TaskEvaluationConfig config, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
@@ -78,10 +78,10 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
         daoUtil.free(  );
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.ITaskEvaluationExpertConfigDAO#store(fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.TaskEvaluationExpertConfig, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public void store( TaskEvaluationConfig config, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
@@ -102,10 +102,10 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
         daoUtil.free(  );
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.ITaskEvaluationExpertConfigDAO#load(int, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public TaskEvaluationConfig load( int nIdTask, Plugin plugin )
     {
         TaskEvaluationConfig config = null;
@@ -136,10 +136,10 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
         return config;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.paris.lutece.plugins.workflow.modules.bourserecherche.business.ITaskEvaluationExpertConfigDAO#delete(int, fr.paris.lutece.portal.service.plugin.Plugin)
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public void delete( int nIdState, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );

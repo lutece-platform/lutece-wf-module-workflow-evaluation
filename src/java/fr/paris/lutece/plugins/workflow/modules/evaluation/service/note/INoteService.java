@@ -31,8 +31,9 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.note;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.note.Note;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.List;
@@ -40,49 +41,25 @@ import java.util.List;
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * INoteService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface INoteService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    // Finders
 
     /**
-     * @param criteria the criteria
+     * Load a note
+     * @param nId the id
      * @param plugin the plugin
+     * @return a note
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    Note findByPrimaryKey( int nId, Plugin plugin );
 
     /**
-     * @param nIdCriteria the id criteria
+     * Get all notes
      * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * @return a list of {@link Note}
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    List<Note> getListNote( Plugin plugin );
 }

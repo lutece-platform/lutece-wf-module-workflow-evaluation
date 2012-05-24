@@ -31,58 +31,89 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
-
-import fr.paris.lutece.portal.service.plugin.Plugin;
-
-import java.util.List;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * EvaluationCriteriaValue
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public class EvaluationCriteriaValue
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    private int _nIdResourceHistory;
+    private int _nIdTask;
+    private int _nIdCriteria;
+    private String _strValue;
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
-     */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    * @return the criteria value
+    */
+    public String getValue(  )
+    {
+        return _strValue;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * set the criteria value
+     * @param strValue the criteria value to set
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    public void setValue( String strValue )
+    {
+        _strValue = strValue;
+    }
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    *
+    * @return the criteria id
+    */
+    public int getIdCriteria(  )
+    {
+        return _nIdCriteria;
+    }
 
     /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
+     * set the criteria id
+     * @param nIdCriteria the criteria id
      */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
+    public void setIdCriteria( int nIdCriteria )
+    {
+        _nIdCriteria = nIdCriteria;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
+    *
+    * @return the ResourceHistory id
+    */
+    public int getIdResourceHistory(  )
+    {
+        return _nIdResourceHistory;
+    }
+
+    /**
+     * the ResourceHistory id
+     * @param nIdResourceHistory the ResourceHistory id
      */
-    void delete( int nIdCriteria, Plugin plugin );
+    public void setIdResourceHistory( int nIdResourceHistory )
+    {
+        _nIdResourceHistory = nIdResourceHistory;
+    }
+
+    /**
+    *
+    * @return the task id
+    */
+    public int getIdTask(  )
+    {
+        return _nIdTask;
+    }
+
+    /**
+     * the task id
+     * @param nIdTask the task id
+     */
+    public void setIdTask( int nIdTask )
+    {
+        _nIdTask = nIdTask;
+    }
 }

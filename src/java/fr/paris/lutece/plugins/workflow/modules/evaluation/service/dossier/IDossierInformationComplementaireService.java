@@ -31,58 +31,38 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.dossier;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier.DossierInformationComplementaire;
 import fr.paris.lutece.portal.service.plugin.Plugin;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * IDossierInformationComplementaireService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface IDossierInformationComplementaireService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    /**
+    * Insert complementary information
+    * @param dossierInformationComplementaire information complementaire
+    * @param plugin le pugin
+    */
+    @Transactional( "workflow-evaluation.transactionManager" )
+    void create( DossierInformationComplementaire dossierInformationComplementaire, Plugin plugin );
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
-     */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
-     */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    * Load complementary information
+    * @param nIdDossier id dossier
+    * @param strTypeRessource the resource type
+    * @param plugin le plugin
+    * @return complementary information
+    */
+    List<DossierInformationComplementaire> selectByIdDossierAndTypeRessource( int nIdDossier, String strTypeRessource,
+        Plugin plugin );
 }

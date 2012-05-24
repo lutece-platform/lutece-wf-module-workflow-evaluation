@@ -31,58 +31,82 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
-
-import fr.paris.lutece.portal.service.plugin.Plugin;
-
-import java.util.List;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * DossierInformationComplementaire
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public class DossierInformationComplementaire
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    private int _nIdDossier;
+    private String _strTypeRessource;
+    private String _strNote;
+    private String _strRapporteur;
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
+     * @return the resource type
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    public String getTypeRessource(  )
+    {
+        return _strTypeRessource;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * @param strTypeRessource the resource type
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    public void setTypeRessource( String strTypeRessource )
+    {
+        _strTypeRessource = strTypeRessource;
+    }
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     * @return the id dossier
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    public int getIdDossier(  )
+    {
+        return _nIdDossier;
+    }
 
     /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
+     * @param nIdDossier the id dossier
      */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
+    public void setIdDossier( int nIdDossier )
+    {
+        _nIdDossier = nIdDossier;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
+     * @return the note
      */
-    void delete( int nIdCriteria, Plugin plugin );
+    public String getNote(  )
+    {
+        return _strNote;
+    }
+
+    /**
+     * @param strNote the note
+     */
+    public void setNote( String strNote )
+    {
+        _strNote = strNote;
+    }
+
+    /**
+     * @return the rapporteur
+     */
+    public String getRapporteur(  )
+    {
+        return _strRapporteur;
+    }
+
+    /**
+     * @param strRapporteur the rapporteur
+     */
+    public void setRapporteur( String strRapporteur )
+    {
+        _strRapporteur = strRapporteur;
+    }
 }

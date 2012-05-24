@@ -31,58 +31,55 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.ISynthesisCriteriaValueDAO;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteriaValue;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * SynthesisCriteriaValueService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public class SynthesisCriteriaValueService implements ISynthesisCriteriaValueService
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Inject
+    private ISynthesisCriteriaValueDAO _synthesisCriteriaValueDAO;
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
+     * {@inheritDoc}
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    @Override
+    @Transactional( "workflow-evaluation.transactionManager" )
+    public void create( SynthesisCriteriaValue criteriaValue, Plugin plugin )
+    {
+        _synthesisCriteriaValueDAO.insert( criteriaValue, plugin );
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * {@inheritDoc}
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    @Override
+    @Transactional( "workflow-evaluation.transactionManager" )
+    public void removeByEvaluation( int nIdHistory, int nIdTask, Plugin plugin )
+    {
+        _synthesisCriteriaValueDAO.deleteByEvaluation( nIdHistory, nIdTask, plugin );
+    }
+
+    // Finders
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     * {@inheritDoc}
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    @Override
+    public SynthesisCriteriaValue findByPrimaryKey( int nIdHistory, int nIdTask, int nIdCriteria, Plugin plugin )
+    {
+        return _synthesisCriteriaValueDAO.load( nIdHistory, nIdTask, nIdCriteria, plugin );
+    }
 }

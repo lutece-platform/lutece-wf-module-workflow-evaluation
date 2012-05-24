@@ -1,20 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-<beans>
- 	 <bean id="dossierInformationComplementaireDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.DossierInformationComplementaireDAO"/>
- 	 <bean id="noteDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.NoteDAO"/>
-     <bean id="taskEvaluationConfigDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationConfigDAO"/>
-     <bean id="taskEvaluationCriteriaDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteriaDAO"/>
-     <bean id="evaluationDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.EvaluationDAO"/>
-     <bean id="evaluationCriteriaValueDAO"  class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.EvaluationCriteriaValueDAO"/>
-     <bean id="workflow-evaluation.synthesisCriteriaValueDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.SynthesisCriteriaValueDAO" />
-     <bean id="workflow-evaluation.synthesisCriteriaDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.SynthesisCriteriaDAO" />
-     
-     <bean id="workflow-evaluation.taskEvaluation" class="fr.paris.lutece.plugins.workflow.business.task.TaskType" >
-     		<property name="key" value="taskEvaluation" />
-     		 <property name="titleI18nKey" value="module.workflow.evaluation.task_evaluation_title" />
-    		 <property name="className" value="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluation"/>
-   	  </bean>
- </beans>
- 	
+	<!-- Transaction Manager -->
+	<bean id="workflow-evaluation.transactionManager" class="fr.paris.lutece.portal.service.database.DAOUtilTransactionManager"
+		p:pluginName="workflow-evaluation" />
+	
+	<!-- DAO -->
+	<bean id="workflow-evaluation.dossierInformationComplementaireDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier.DossierInformationComplementaireDAO"/>
+	<bean id="workflow-evaluation.noteDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.note.NoteDAO"/>
+	<bean id="workflow-evaluation.taskEvaluationConfigDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationConfigDAO"/>
+	<bean id="workflow-evaluation.taskEvaluationCriteriaDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteriaDAO"/>
+	<bean id="workflow-evaluation.evaluationDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.EvaluationDAO" />
+	<bean id="workflow-evaluation.evaluationCriteriaValueDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.EvaluationCriteriaValueDAO"/>
+	<bean id="workflow-evaluation.workflow-evaluation.synthesisCriteriaValueDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteriaValueDAO" />
+	<bean id="workflow-evaluation.workflow-evaluation.synthesisCriteriaDAO" class="fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteriaDAO" />
+
+	<!-- Task -->
+	<bean id="workflow-evaluation.taskTypeEvaluation" class="fr.paris.lutece.plugins.workflowcore.business.task.TaskType"
+		p:key="taskEvaluation"
+		p:titleI18nKey="module.workflow.evaluation.task_evaluation_title"
+		p:beanName="workflow-evaluation.taskEvaluation"
+		p:configRequired="true"
+		p:formTaskRequired="true" />
+	<bean id="workflow-evaluation.taskEvaluation" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.TaskEvaluation" scope="prototype" />
+	<bean id="workflow-evaluation.evaluationTaskComponent" class="fr.paris.lutece.plugins.workflow.modules.evaluation.web.EvaluationTaskComponent"
+		p:taskType-ref="workflow-evaluation.taskTypeEvaluation" />
+	
+	<!-- Services -->
+	<bean id="workflow-evaluation.dossierInformationComplementaireService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.dossier.DossierInformationComplementaireService" />
+	<bean id="workflow-evaluation.evaluationCriteriaValueService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation.EvaluationCriteriaValueService" />
+	<bean id="workflow-evaluation.evaluationService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation.EvaluationService" />
+	<bean id="workflow-evaluation.noteService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.note.NoteService" />
+	<bean id="workflow-evaluation.synthesisCriteriaService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis.SynthesisCriteriaService" />
+	<bean id="workflow-evaluation.synthesisCriteriaValueService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis.SynthesisCriteriaValueService" />
+	<bean id="workflow-evaluation.taskEvaluationConfigService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.TaskEvaluationConfigService" />
+	<bean id="workflow-evaluation.taskEvaluationCriteriaService" class="fr.paris.lutece.plugins.workflow.modules.evaluation.service.TaskEvaluationCriteriaService" />
+</beans>

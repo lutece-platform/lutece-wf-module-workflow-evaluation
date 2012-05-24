@@ -31,58 +31,81 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.note;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
-
-import java.util.List;
+import fr.paris.lutece.plugins.workflowcore.business.IReferenceItem;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * Note
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public class Note implements IReferenceItem
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    private int _nIdNote;
+    private String _strLibelle;
+    private String _strValeur;
 
     /**
-     * @param criteria the criteria
-     * @param plugin the plugin
+     *
+     * @return l identifiant de la note
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    public int getId(  )
+    {
+        return _nIdNote;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * renseigne l identifiant de la note
+     * @param idNote l identifiant de la note
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    public void setId( int idNote )
+    {
+        _nIdNote = idNote;
+    }
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     *
+     * @return le libelle de la note
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    public String getLibelle(  )
+    {
+        return _strLibelle;
+    }
 
     /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
+     * renseigne le libelle de la note
+     * @param libelle le libelle de la note
      */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
+    public void setLibelle( String libelle )
+    {
+        _strLibelle = libelle;
+    }
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
+     *
+     * @return la valeur de la note
      */
-    void delete( int nIdCriteria, Plugin plugin );
+    public String getValeur(  )
+    {
+        return _strValeur;
+    }
+
+    /**
+     * renseigne la valeur de la note
+     * @param valeur la valeur de la note
+     */
+    public void setValeur( String valeur )
+    {
+        _strValeur = valeur;
+    }
+
+    /**
+     * @return le libelle de la note
+     */
+    public String getName(  )
+    {
+        return getLibelle(  );
+    }
 }

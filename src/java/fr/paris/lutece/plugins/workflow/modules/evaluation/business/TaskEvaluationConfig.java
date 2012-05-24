@@ -33,12 +33,14 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
 
+import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
+
 import java.util.List;
 
 
 /**
  *
- *TaskEvaluationExpertConfig
+ * TaskEvaluationExpertConfig
  *
  */
 public class TaskEvaluationConfig
@@ -50,15 +52,14 @@ public class TaskEvaluationConfig
     private boolean _bMandatorySummary;
     private List<TaskEvaluationCriteria> _listEvaluationsCriteria;
     private List<SynthesisCriteria> _listSynthesisCriteria;
-    private String strFinalNoteTitle;
+    private String _strFinalNoteTitle;
     private boolean _bMandatoryFinalNote;
     private boolean _bAutomaticFinalNote;
-    private String strBestScoreFinalNote;
+    private String _strBestScoreFinalNote;
 
     /**
-    *
-    * @return l'identifiant de la tache
-    */
+     * @return l'identifiant de la tache
+     */
     public int getIdTask(  )
     {
         return _nIdTask;
@@ -84,7 +85,7 @@ public class TaskEvaluationConfig
 
     /**
      * set true si la synthese est Obligatoire
-     * @param syntheseObligatoire true si la synthese est Obligatoire
+     * @param bMandatorySummary true si la synthese est Obligatoire
      */
     public void setMandatorySummary( boolean bMandatorySummary )
     {
@@ -137,12 +138,11 @@ public class TaskEvaluationConfig
     }
 
     /**
-    * set a title of task
-    * @param listCriterias list of criteria
-    */
-    public void setTaskTitle( String titleTask )
+     * @param strTitleTask the task title
+     */
+    public void setTaskTitle( String strTitleTask )
     {
-        _strTaskTitle = titleTask;
+        _strTaskTitle = strTitleTask;
     }
 
     /**
@@ -155,12 +155,11 @@ public class TaskEvaluationConfig
     }
 
     /**
-    * set a description of task
-    * @param _strTaskDescription list of criteria
-    */
-    public void setTaskDescription( String descriptionTask )
+     * @param strDescriptionTask the description of the task
+     */
+    public void setTaskDescription( String strDescriptionTask )
     {
-        _strTaskDescription = descriptionTask;
+        _strTaskDescription = strDescriptionTask;
     }
 
     /**
@@ -169,7 +168,7 @@ public class TaskEvaluationConfig
      */
     public String getFinalNoteTitle(  )
     {
-        return strFinalNoteTitle;
+        return _strFinalNoteTitle;
     }
 
     /**
@@ -178,7 +177,7 @@ public class TaskEvaluationConfig
     */
     public void setFinalNoteTitle( String strTitleFinalNote )
     {
-        this.strFinalNoteTitle = strTitleFinalNote;
+        this._strFinalNoteTitle = strTitleFinalNote;
     }
 
     /**
@@ -209,9 +208,8 @@ public class TaskEvaluationConfig
     }
 
     /**
-    * set the type note final of task
-    * @param strTypeFinalNote type note final
-    */
+     * @param bAutomaticFinalNote the type note final
+     */
     public void setAutomaticFinalNote( boolean bAutomaticFinalNote )
     {
         _bAutomaticFinalNote = bAutomaticFinalNote;
@@ -223,23 +221,31 @@ public class TaskEvaluationConfig
      */
     public String getBestScoreFinalNote(  )
     {
-        return strBestScoreFinalNote;
+        return _strBestScoreFinalNote;
     }
 
     /**
-    * set the best note final of task
-    * @param strBestScoreFinalNote best note final
-    */
+     * set the best note final of task
+     * @param strBestScoreFinalNote best note final
+     */
     public void setBestScoreFinalNote( String strBestScoreFinalNote )
     {
-        this.strBestScoreFinalNote = strBestScoreFinalNote;
+        this._strBestScoreFinalNote = strBestScoreFinalNote;
     }
 
-	public void setListSynthesisCriteria(List<SynthesisCriteria> listSynthesisCriteria) {
-		this._listSynthesisCriteria = listSynthesisCriteria;
-	}
+    /**
+     * @param listSynthesisCriteria the list of criteria
+     */
+    public void setListSynthesisCriteria( List<SynthesisCriteria> listSynthesisCriteria )
+    {
+        this._listSynthesisCriteria = listSynthesisCriteria;
+    }
 
-	public List<SynthesisCriteria> getListSynthesisCriteria() {
-		return _listSynthesisCriteria;
-	}
+    /**
+     * @return the list of criteria
+     */
+    public List<SynthesisCriteria> getListSynthesisCriteria(  )
+    {
+        return _listSynthesisCriteria;
+    }
 }

@@ -42,7 +42,7 @@ import java.util.List;
 
 /**
  *
- *class   TaskEvaluationCriteriaDAO
+ *  TaskEvaluationCriteriaDAO
  *
  */
 public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
@@ -63,7 +63,6 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
 
     /**
      * Generates a new primary key
-     *
      * @param plugin the plugin
      * @return The new primary key
      */
@@ -88,8 +87,8 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
 
     /**
      * Generates a new position
-     *
      * @param plugin the plugin
+     * @param nIdTask the id task
      * @return The new position
      */
     private int newPosition( Plugin plugin, int nIdTask )
@@ -115,9 +114,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         return nPosition;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#insert(fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteria, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public synchronized void insert( TaskEvaluationCriteria criteria, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
@@ -137,9 +137,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         daoUtil.free(  );
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#store(fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteria, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void store( TaskEvaluationCriteria criteria, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
@@ -157,9 +158,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         daoUtil.free(  );
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#load(int, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin )
     {
         TaskEvaluationCriteria criteria = null;
@@ -187,9 +189,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         return criteria;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#selectByIdTask(int, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin )
     {
         TaskEvaluationCriteria criteria = null;
@@ -220,9 +223,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         return listCriteria;
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#delete(int, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void deleteByIdTask( int nIdTask, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE_BY_ID_TASK, plugin );
@@ -232,9 +236,10 @@ public class TaskEvaluationCriteriaDAO implements ITaskEvaluationCriteriaDAO
         daoUtil.free(  );
     }
 
-    /* (non-Javadoc)
-         * @see fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationCriteriaDAO#delete(int, fr.paris.lutece.portal.service.plugin.Plugin)
-         */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void delete( int nIdCriteria, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );

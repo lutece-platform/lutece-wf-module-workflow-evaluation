@@ -31,58 +31,40 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
-
-import java.util.List;
 
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * IEvaluationCriteriaValueDAO
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface IEvaluationCriteriaValueDAO
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
-
     /**
-     * @param criteria the criteria
+     * Insert a new record in the table.
+     * @param evaluationCriteriaValue the criteria value
      * @param plugin the plugin
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    void insert( EvaluationCriteriaValue evaluationCriteriaValue, Plugin plugin );
 
     /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
-     */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
+     * Load criteria value  Object
+     * @param nIdHistory  the history id
      * @param nIdTask the id task
+     * @param nIdCriteria the criteria id
      * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     * @return criteria value
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    EvaluationCriteriaValue load( int nIdHistory, int nIdTask, int nIdCriteria, Plugin plugin );
 
     /**
-     * Delete from a given id task
+     * Delete criteria value by evaluation
+     * @param nIdHistory the history id
      * @param nIdTask the id task
      * @param plugin the plugin
      */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    void deleteByEvaluation( int nIdHistory, int nIdTask, Plugin plugin );
 }

@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
@@ -40,49 +40,24 @@ import java.util.List;
 
 /**
  *
- * ITaskEvaluationCriteriaDAO
+ * fr.paris.lutece.plugins.workflow.modules.evaluation.service.TaskEvaluationCriteriaService
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface IDossierInformationComplementaireDAO
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    /**
+     * Create a new dossier
+     * @param dossierInformationComplementaire the dossier
+     * @param plugin the pugin
+     */
+    void insert( DossierInformationComplementaire dossierInformationComplementaire, Plugin plugin );
 
     /**
-     * @param criteria the criteria
+     * Find dossier from a given id
+     * @param nId the id
+     * @param strTypeRessource the resource type
      * @param plugin the plugin
+     * @return a list of {@link DossierInformationComplementaire}
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
-     */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
-
-    /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
-     */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * Delete from a given id task
-     * @param nIdTask the id task
-     * @param plugin the plugin
-     */
-    void deleteByIdTask( int nIdTask, Plugin plugin );
-
-    /**
-     * @param nIdCriteria the id criteria
-     * @param plugin the plugin
-     */
-    void delete( int nIdCriteria, Plugin plugin );
+    List<DossierInformationComplementaire> load( int nId, String strTypeRessource, Plugin plugin );
 }

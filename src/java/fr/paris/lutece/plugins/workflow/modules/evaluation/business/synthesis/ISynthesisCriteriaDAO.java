@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
+package fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
@@ -39,49 +39,51 @@ import java.util.List;
 
 
 /**
- *
- * ITaskEvaluationCriteriaDAO
+ * ISynthesisCriteriaDAO
  *
  */
-public interface ITaskEvaluationCriteriaDAO
+public interface ISynthesisCriteriaDAO
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
-    void insert( TaskEvaluationCriteria criteria, Plugin plugin );
+    /**
+     * Adds a new element
+     * @param criteria criteria
+     * @param plugin the plugin
+     */
+    void insert( SynthesisCriteria criteria, Plugin plugin );
 
     /**
+     * stores the criteria
      * @param criteria the criteria
      * @param plugin the plugin
      */
-    void store( TaskEvaluationCriteria criteria, Plugin plugin );
+    void store( SynthesisCriteria criteria, Plugin plugin );
 
     /**
-     * @param nIdCriteria the id criteria
+     * Finds the criteria
+     * @param nIdCriteria primary key
      * @param plugin the plugin
-     * @return a {@link TaskEvaluationCriteria}
+     * @return the criteria found
      */
-    TaskEvaluationCriteria load( int nIdCriteria, Plugin plugin );
+    SynthesisCriteria load( int nIdCriteria, Plugin plugin );
 
     /**
-     * Find a list of {@link TaskEvaluationCriteria} from a given id task
-     * @param nIdTask the id task
+     * Finds all criteria for this task
+     * @param nIdTask the task
      * @param plugin the plugin
-     * @return a list of {@link TaskEvaluationCriteria}
+     * @return the list
      */
-    List<TaskEvaluationCriteria> selectByIdTask( int nIdTask, Plugin plugin );
+    List<SynthesisCriteria> selectByIdTask( int nIdTask, Plugin plugin );
 
     /**
-     * Delete from a given id task
-     * @param nIdTask the id task
+     * Removes all the criteria for the task
+     * @param nIdTask the task id
      * @param plugin the plugin
      */
     void deleteByIdTask( int nIdTask, Plugin plugin );
 
     /**
-     * @param nIdCriteria the id criteria
+     * Removes the criteria
+     * @param nIdCriteria the primary key
      * @param plugin the plugin
      */
     void delete( int nIdCriteria, Plugin plugin );

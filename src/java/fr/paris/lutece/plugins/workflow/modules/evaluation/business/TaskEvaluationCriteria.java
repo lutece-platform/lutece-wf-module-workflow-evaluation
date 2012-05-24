@@ -35,7 +35,11 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
 
 import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
 
-
+/**
+ * 
+ * TaskEvaluationCriteria
+ *
+ */
 public class TaskEvaluationCriteria
 {
     private int _nIdCriteria = WorkflowUtils.CONSTANT_ID_NULL;
@@ -46,21 +50,19 @@ public class TaskEvaluationCriteria
     private int _nPosition;
 
     /**
-    *
-    * @return the criteria id
-    */
+     * @return the criteria id
+     */
     public int getIdCriteria(  )
     {
         return _nIdCriteria;
     }
 
     /**
-     * set the criteria id
-     * @param the criteria id
+     * @param nIdCriteria the criteria id
      */
-    public void setIdCriteria( int idCriteria )
+    public void setIdCriteria( int nIdCriteria )
     {
-        _nIdCriteria = idCriteria;
+        _nIdCriteria = nIdCriteria;
     }
 
     /**
@@ -74,11 +76,11 @@ public class TaskEvaluationCriteria
 
     /**
      * set the task id
-     * @param the task id
+     * @param nIdTask the task id
      */
-    public void setIdTask( int idTask )
+    public void setIdTask( int nIdTask )
     {
-        _nIdTask = idTask;
+        _nIdTask = nIdTask;
     }
 
     /**
@@ -92,11 +94,11 @@ public class TaskEvaluationCriteria
 
     /**
      * set true if the criteria is mandatory
-     * @param mandatory boolean
+     * @param bMandatory true if it is mandatory, false otherwise
      */
-    public void setMandatory( boolean mandatory )
+    public void setMandatory( boolean bMandatory )
     {
-        _bMandatory = mandatory;
+        _bMandatory = bMandatory;
     }
 
     /**
@@ -110,11 +112,11 @@ public class TaskEvaluationCriteria
 
     /**
      * set the criteria title
-     * @param title the title
+     * @param strTitle the title
      */
-    public void setTitle( String title )
+    public void setTitle( String strTitle )
     {
-        _strTitle = title;
+        _strTitle = strTitle;
     }
 
     /**
@@ -146,10 +148,10 @@ public class TaskEvaluationCriteria
 
     /**
      * set the criteria position
-     * @param position the criteria position
+     * @param nPosition the criteria position
      */
-    public void setPosition( int position )
+    public void setPosition( int nPosition )
     {
-        _nPosition = position;
+        _nPosition = nPosition;
     }
 }
