@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.ISynthesisCriteriaDAO;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +68,7 @@ public class SynthesisCriteriaService implements ISynthetisCriteriaService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void create( SynthesisCriteria criteria, Plugin plugin )
     {
         _synthesisCriteriaDAO.insert( criteria, plugin );
@@ -77,7 +78,7 @@ public class SynthesisCriteriaService implements ISynthetisCriteriaService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void update( SynthesisCriteria criteria, Plugin plugin )
     {
         _synthesisCriteriaDAO.store( criteria, plugin );
@@ -96,7 +97,7 @@ public class SynthesisCriteriaService implements ISynthetisCriteriaService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void removeByIdTask( int nIdTask, Plugin plugin )
     {
         _synthesisCriteriaDAO.deleteByIdTask( nIdTask, plugin );
@@ -106,7 +107,7 @@ public class SynthesisCriteriaService implements ISynthetisCriteriaService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void remove( int nIdCriteria, Plugin plugin )
     {
         _synthesisCriteriaDAO.delete( nIdCriteria, plugin );

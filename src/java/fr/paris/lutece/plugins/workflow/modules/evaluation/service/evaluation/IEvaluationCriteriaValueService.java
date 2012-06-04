@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.EvaluationCriteriaValue;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +52,7 @@ public interface IEvaluationCriteriaValueService
     * @param criteriaValue an instance of criteriaValue
     * @param plugin the plugin
     */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void create( EvaluationCriteriaValue criteriaValue, Plugin plugin );
 
     /**
@@ -61,7 +62,7 @@ public interface IEvaluationCriteriaValueService
      * @param plugin the Plugin
      *
      */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void removeByEvaluation( int nIdHistory, int nIdTask, Plugin plugin );
 
     // Finders

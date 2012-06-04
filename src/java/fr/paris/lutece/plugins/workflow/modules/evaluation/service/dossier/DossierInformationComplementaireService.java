@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.service.dossier;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier.DossierInformationComplementaire;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier.IDossierInformationComplementaireDAO;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +59,7 @@ public class DossierInformationComplementaireService implements IDossierInformat
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void create( DossierInformationComplementaire dossierInformationComplementaire, Plugin plugin )
     {
         _dossierInformationComplementaireDAO.insert( dossierInformationComplementaire, plugin );

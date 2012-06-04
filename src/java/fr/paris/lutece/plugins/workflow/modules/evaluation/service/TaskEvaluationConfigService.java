@@ -33,11 +33,12 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.evaluation.service;
 
-import fr.paris.lutece.plugins.workflow.modules.evaluation.business.ITaskEvaluationConfigDAO;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationConfig;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.TaskEvaluationCriteria;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis.ISynthetisCriteriaService;
+import fr.paris.lutece.plugins.workflowcore.business.config.ITaskConfig;
+import fr.paris.lutece.plugins.workflowcore.service.config.TaskConfigService;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.util.AppLogService;
 
@@ -54,10 +55,9 @@ import javax.inject.Inject;
  * TaskEvaluationConfigService
  *
  */
-public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
+public class TaskEvaluationConfigService extends TaskConfigService
 {
-    @Inject
-    private ITaskEvaluationConfigDAO _taskEvaluationConfigDAO;
+    public static final String BEAN_SERVICE = "workflow-evaluation.taskEvaluationConfigService";
     @Inject
     private ISynthetisCriteriaService _synthesisCriteriaService;
     @Inject
@@ -67,24 +67,31 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
-    public void create( TaskEvaluationConfig config, Plugin plugin )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
+    public void create( ITaskConfig config )
     {
-        _taskEvaluationConfigDAO.insert( config, plugin );
-        //create criteria criteria associated
+        super.create( config );
+
+        // Create criteria criteria associated
+        Plugin plugin = EvaluationPlugin.getPlugin(  );
         _taskEvaluationCriteriaService.removeByIdTask( config.getIdTask(  ), plugin );
 
-        for ( TaskEvaluationCriteria criteria : config.getEvaluationsCriteria(  ) )
-        {
-            _taskEvaluationCriteriaService.create( criteria, plugin );
-        }
+        TaskEvaluationConfig evaluationConfig = getConfigBean( config );
 
-        // create synthesis criteria associated
-        _synthesisCriteriaService.removeByIdTask( config.getIdTask(  ), plugin );
-
-        for ( SynthesisCriteria criteria : config.getListSynthesisCriteria(  ) )
+        if ( evaluationConfig != null )
         {
-            _synthesisCriteriaService.create( criteria, plugin );
+            for ( TaskEvaluationCriteria criteria : evaluationConfig.getEvaluationsCriteria(  ) )
+            {
+                _taskEvaluationCriteriaService.create( criteria, plugin );
+            }
+
+            // create synthesis criteria associated
+            _synthesisCriteriaService.removeByIdTask( config.getIdTask(  ), plugin );
+
+            for ( SynthesisCriteria criteria : evaluationConfig.getListSynthesisCriteria(  ) )
+            {
+                _synthesisCriteriaService.create( criteria, plugin );
+            }
         }
     }
 
@@ -92,19 +99,22 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
-    public void update( TaskEvaluationConfig config, Plugin plugin )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
+    public void update( ITaskConfig config )
     {
-        _taskEvaluationConfigDAO.store( config, plugin );
+        super.update( config );
 
-        //update criterias associated
+        // Update criterias associated
+        Plugin plugin = EvaluationPlugin.getPlugin(  );
         List<TaskEvaluationCriteria> taskEvaluationCriteriaOld = _taskEvaluationCriteriaService.selectByIdTask( config.getIdTask(  ),
                 plugin );
+
+        TaskEvaluationConfig evaluationConfig = getConfigBean( config );
 
         for ( TaskEvaluationCriteria criteriaOld : taskEvaluationCriteriaOld )
         {
             boolean isExist = false;
-            Iterator<TaskEvaluationCriteria> itCriteria = config.getEvaluationsCriteria(  ).iterator(  );
+            Iterator<TaskEvaluationCriteria> itCriteria = evaluationConfig.getEvaluationsCriteria(  ).iterator(  );
 
             while ( itCriteria.hasNext(  ) && !isExist )
             {
@@ -127,7 +137,7 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
         for ( SynthesisCriteria criteriaOld : synthesisCriteriaOld )
         {
             boolean bExists = false;
-            Iterator<SynthesisCriteria> itCriteria = config.getListSynthesisCriteria(  ).iterator(  );
+            Iterator<SynthesisCriteria> itCriteria = evaluationConfig.getListSynthesisCriteria(  ).iterator(  );
 
             while ( itCriteria.hasNext(  ) && !bExists )
             {
@@ -148,7 +158,7 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
             }
         }
 
-        for ( TaskEvaluationCriteria criteria : config.getEvaluationsCriteria(  ) )
+        for ( TaskEvaluationCriteria criteria : evaluationConfig.getEvaluationsCriteria(  ) )
         {
             if ( criteria.getIdCriteria(  ) != -1 )
             {
@@ -160,7 +170,7 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
             }
         }
 
-        for ( SynthesisCriteria criteria : config.getListSynthesisCriteria(  ) )
+        for ( SynthesisCriteria criteria : evaluationConfig.getListSynthesisCriteria(  ) )
         {
             if ( criteria.getIdCriteria(  ) > 0 )
             {
@@ -177,14 +187,15 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
-    public void remove( int nIdTask, Plugin plugin )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
+    public void remove( int nIdTask )
     {
-        //delete all criterias associated
+        // Delete all criterias associated
+        Plugin plugin = EvaluationPlugin.getPlugin(  );
         _taskEvaluationCriteriaService.removeByIdTask( nIdTask, plugin );
-        // delete all synthesis criterias
+        // Delete all synthesis criterias
         _synthesisCriteriaService.removeByIdTask( nIdTask, plugin );
-        _taskEvaluationConfigDAO.delete( nIdTask, plugin );
+        super.remove( nIdTask );
     }
 
     // Finders
@@ -193,12 +204,13 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
      * {@inheritDoc}
      */
     @Override
-    public TaskEvaluationConfig findByPrimaryKey( int nIdTask, Plugin plugin )
+    public <T> T findByPrimaryKey( int nIdTask )
     {
-        TaskEvaluationConfig taskEvaluationConfig = _taskEvaluationConfigDAO.load( nIdTask, plugin );
+        TaskEvaluationConfig taskEvaluationConfig = super.findByPrimaryKey( nIdTask );
 
         if ( taskEvaluationConfig != null )
         {
+            Plugin plugin = EvaluationPlugin.getPlugin(  );
             List<TaskEvaluationCriteria> listCriterias = _taskEvaluationCriteriaService.selectByIdTask( taskEvaluationConfig.getIdTask(  ),
                     plugin );
             taskEvaluationConfig.setEvaluationsCriteria( listCriterias );
@@ -208,6 +220,6 @@ public class TaskEvaluationConfigService implements ITaskEvaluationConfigService
             taskEvaluationConfig.setListSynthesisCriteria( listSynthesisCriteria );
         }
 
-        return taskEvaluationConfig;
+        return (T) taskEvaluationConfig;
     }
 }

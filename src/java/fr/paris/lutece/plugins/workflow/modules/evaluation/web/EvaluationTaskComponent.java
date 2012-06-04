@@ -42,13 +42,14 @@ import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.Sy
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria.Type;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteriaValue;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
-import fr.paris.lutece.plugins.workflow.modules.evaluation.service.ITaskEvaluationConfigService;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.TaskEvaluationConfigService;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation.IEvaluationCriteriaValueService;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation.IEvaluationService;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis.ISynthesisCriteriaValueService;
 import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
+import fr.paris.lutece.plugins.workflow.web.task.AbstractTaskComponent;
+import fr.paris.lutece.plugins.workflowcore.service.config.ITaskConfigService;
 import fr.paris.lutece.plugins.workflowcore.service.task.ITask;
-import fr.paris.lutece.plugins.workflowcore.web.task.TaskComponent;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
@@ -70,6 +71,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -79,7 +81,7 @@ import javax.servlet.http.HttpServletRequest;
  * EvaluationTaskComponent
  *
  */
-public class EvaluationTaskComponent extends TaskComponent
+public class EvaluationTaskComponent extends AbstractTaskComponent
 {
     //templates
     private static final String TEMPLATE_TASK_EVALUATION_CONFIG = "admin/plugins/workflow/modules/evaluation/task_evaluation_config.html";
@@ -155,7 +157,8 @@ public class EvaluationTaskComponent extends TaskComponent
 
     // SERVICES
     @Inject
-    private ITaskEvaluationConfigService _taskEvalutionConfigService;
+    @Named( TaskEvaluationConfigService.BEAN_SERVICE )
+    private ITaskConfigService _taskEvalutionConfigService;
     @Inject
     private IEvaluationService _evaluationService;
     @Inject
@@ -223,9 +226,7 @@ public class EvaluationTaskComponent extends TaskComponent
                 AdminMessage.TYPE_STOP );
         }
 
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
         Boolean bCreate = false;
 
         if ( config == null )
@@ -285,11 +286,11 @@ public class EvaluationTaskComponent extends TaskComponent
 
         if ( bCreate )
         {
-            _taskEvalutionConfigService.create( config, plugin );
+            _taskEvalutionConfigService.create( config );
         }
         else
         {
-            _taskEvalutionConfigService.update( config, plugin );
+            _taskEvalutionConfigService.update( config );
         }
 
         return null;
@@ -308,8 +309,7 @@ public class EvaluationTaskComponent extends TaskComponent
         String strSummary = request.getParameter( PARAMETER_SUMMARY + "_" + task.getId(  ) );
         String strFinalNote = request.getParameter( PARAMETER_FINAL_NOTE + "_" + task.getId(  ) );
         int nFinalNote = WorkflowUtils.convertStringToInt( strFinalNote );
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
 
         if ( config == null )
         {
@@ -410,8 +410,7 @@ public class EvaluationTaskComponent extends TaskComponent
     public String getDisplayConfigForm( HttpServletRequest request, Locale locale, ITask task )
     {
         Map<String, Object> model = new HashMap<String, Object>(  );
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
 
         if ( config == null )
         {
@@ -464,8 +463,7 @@ public class EvaluationTaskComponent extends TaskComponent
         Locale locale, ITask task )
     {
         Map<String, Object> model = new HashMap<String, Object>(  );
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
         model.put( MARK_CONFIG, config );
 
         int automaticBestScore = 0;
@@ -495,7 +493,7 @@ public class EvaluationTaskComponent extends TaskComponent
         Map<String, Object> model = new HashMap<String, Object>(  );
 
         List<Map<String, String>> listHashCriterias = new ArrayList<Map<String, String>>(  );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
 
         if ( config != null )
         {
@@ -549,7 +547,7 @@ public class EvaluationTaskComponent extends TaskComponent
         Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
         StringBuffer strXml = new StringBuffer(  );
         Evaluation evaluationValue = _evaluationService.findByPrimaryKey( nIdHistory, task.getId(  ), plugin );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( task.getId(  ) );
         EvaluationCriteriaValue evaluationCriteriaValue;
 
         if ( evaluationValue != null )

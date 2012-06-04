@@ -69,7 +69,7 @@ public class TaskEvaluationCriteriaService implements ITaskEvaluationCriteriaSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void create( TaskEvaluationCriteria criteria, Plugin plugin )
     {
         _taskEvaluationCriteriaDAO.insert( criteria, plugin );
@@ -79,7 +79,7 @@ public class TaskEvaluationCriteriaService implements ITaskEvaluationCriteriaSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void update( TaskEvaluationCriteria criteria, Plugin plugin )
     {
         _taskEvaluationCriteriaDAO.store( criteria, plugin );
@@ -98,7 +98,7 @@ public class TaskEvaluationCriteriaService implements ITaskEvaluationCriteriaSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void removeByIdTask( int nIdState, Plugin plugin )
     {
         _taskEvaluationCriteriaDAO.deleteByIdTask( nIdState, plugin );
@@ -108,7 +108,7 @@ public class TaskEvaluationCriteriaService implements ITaskEvaluationCriteriaSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void remove( int nIdCriteria, Plugin plugin )
     {
         _taskEvaluationCriteriaDAO.delete( nIdCriteria, plugin );

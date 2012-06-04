@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.ISynthesisCriteriaValueDAO;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteriaValue;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,7 @@ public class SynthesisCriteriaValueService implements ISynthesisCriteriaValueSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void create( SynthesisCriteriaValue criteriaValue, Plugin plugin )
     {
         _synthesisCriteriaValueDAO.insert( criteriaValue, plugin );
@@ -66,7 +67,7 @@ public class SynthesisCriteriaValueService implements ISynthesisCriteriaValueSer
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void removeByEvaluation( int nIdHistory, int nIdTask, Plugin plugin )
     {
         _synthesisCriteriaValueDAO.deleteByEvaluation( nIdHistory, nIdTask, plugin );

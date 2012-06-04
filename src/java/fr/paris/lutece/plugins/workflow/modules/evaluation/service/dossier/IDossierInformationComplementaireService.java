@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.workflow.modules.evaluation.service.dossier;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.dossier.DossierInformationComplementaire;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +54,7 @@ public interface IDossierInformationComplementaireService
     * @param dossierInformationComplementaire information complementaire
     * @param plugin le pugin
     */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void create( DossierInformationComplementaire dossierInformationComplementaire, Plugin plugin );
 
     /**

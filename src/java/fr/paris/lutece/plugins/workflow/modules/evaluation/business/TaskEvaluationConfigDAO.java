@@ -33,7 +33,8 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
 
-import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
+import fr.paris.lutece.plugins.workflowcore.business.config.ITaskConfigDAO;
 import fr.paris.lutece.util.sql.DAOUtil;
 
 
@@ -42,7 +43,7 @@ import fr.paris.lutece.util.sql.DAOUtil;
  * TaskEvaluationConfigDAO
  *
  */
-public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
+public class TaskEvaluationConfigDAO implements ITaskConfigDAO<TaskEvaluationConfig>
 {
     private static final String SQL_QUERY_FIND_BY_PRIMARY_KEY = "SELECT id_task,title_task,description_task,summary_title,is_mandatory_summary,title_final_note,is_mandatory_final_note,is_final_note_automatic,best_score_final_note " +
         "FROM task_evaluation_cf  WHERE id_task=?";
@@ -58,9 +59,9 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public synchronized void insert( TaskEvaluationConfig config, Plugin plugin )
+    public synchronized void insert( TaskEvaluationConfig config )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, EvaluationPlugin.getPlugin(  ) );
 
         int nPos = 0;
 
@@ -82,9 +83,9 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public void store( TaskEvaluationConfig config, Plugin plugin )
+    public void store( TaskEvaluationConfig config )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, EvaluationPlugin.getPlugin(  ) );
 
         int nPos = 0;
 
@@ -106,10 +107,10 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public TaskEvaluationConfig load( int nIdTask, Plugin plugin )
+    public TaskEvaluationConfig load( int nIdTask )
     {
         TaskEvaluationConfig config = null;
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_FIND_BY_PRIMARY_KEY, EvaluationPlugin.getPlugin(  ) );
 
         daoUtil.setInt( 1, nIdTask );
 
@@ -140,9 +141,9 @@ public class TaskEvaluationConfigDAO implements ITaskEvaluationConfigDAO
      * {@inheritDoc}
      */
     @Override
-    public void delete( int nIdState, Plugin plugin )
+    public void delete( int nIdState )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, EvaluationPlugin.getPlugin(  ) );
 
         daoUtil.setInt( 1, nIdState );
         daoUtil.executeUpdate(  );

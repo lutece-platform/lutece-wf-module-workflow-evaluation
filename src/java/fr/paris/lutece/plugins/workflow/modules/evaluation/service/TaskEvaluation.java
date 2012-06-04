@@ -44,6 +44,7 @@ import fr.paris.lutece.plugins.workflow.modules.evaluation.service.dossier.IDoss
 import fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation.IEvaluationService;
 import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
 import fr.paris.lutece.plugins.workflowcore.business.resource.ResourceHistory;
+import fr.paris.lutece.plugins.workflowcore.service.config.ITaskConfigService;
 import fr.paris.lutece.plugins.workflowcore.service.resource.IResourceHistoryService;
 import fr.paris.lutece.plugins.workflowcore.service.task.Task;
 import fr.paris.lutece.portal.business.user.AdminUser;
@@ -61,6 +62,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -79,7 +81,8 @@ public class TaskEvaluation extends Task
 
     // SERVICES
     @Inject
-    private ITaskEvaluationConfigService _taskEvalutionConfigService;
+    @Named( TaskEvaluationConfigService.BEAN_SERVICE )
+    private ITaskConfigService _taskEvalutionConfigService;
     @Inject
     private IEvaluationService _evaluationService;
     @Inject
@@ -104,7 +107,7 @@ public class TaskEvaluation extends Task
         String strSummary = request.getParameter( PARAMETER_SUMMARY + "_" + this.getId(  ) );
         String strFinalNote = request.getParameter( PARAMETER_FINAL_NOTE + "_" + this.getId(  ) );
         Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ) );
 
         int nFinalNoteAuto = 0;
         EvaluationCriteriaValue criteriaValue;
@@ -195,8 +198,7 @@ public class TaskEvaluation extends Task
     @Override
     public void doRemoveConfig(  )
     {
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        _taskEvalutionConfigService.remove( this.getId(  ), plugin );
+        _taskEvalutionConfigService.remove( this.getId(  ) );
     }
 
     /**
@@ -215,8 +217,7 @@ public class TaskEvaluation extends Task
     @Override
     public String getTitle( Locale locale )
     {
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ) );
 
         if ( config != null )
         {
@@ -232,8 +233,7 @@ public class TaskEvaluation extends Task
     @Override
     public Map<String, String> getTaskFormEntries( Locale locale )
     {
-        Plugin plugin = PluginService.getPlugin( EvaluationPlugin.PLUGIN_NAME );
-        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ), plugin );
+        TaskEvaluationConfig config = _taskEvalutionConfigService.findByPrimaryKey( this.getId(  ) );
         Map<String, String> mapListEntriesForm = null;
 
         if ( config != null )

@@ -33,7 +33,9 @@
  */
 package fr.paris.lutece.plugins.workflow.modules.evaluation.service;
 
+import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
+import fr.paris.lutece.portal.service.plugin.PluginService;
 
 
 /**
@@ -43,14 +45,15 @@ import fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation;
  */
 public class EvaluationPlugin extends PluginDefaultImplementation
 {
-    public static final String PLUGIN_NAME = "evaluation";
+    public static final String PLUGIN_NAME = "workflow-evaluation";
+    public static final String BEAN_TRANSACTION_MANAGER = "workflow-evaluation.transactionManager";
 
     /**
-     * Initialise the module bourserecherche
+     * Get the plugin
+     * @return the plugin
      */
-    public void init(  )
+    public static Plugin getPlugin(  )
     {
-        /*Dossier.init(  );
-        ReferentialService.getInstance(  ).init(  );*/
+        return PluginService.getPlugin( PLUGIN_NAME );
     }
 }

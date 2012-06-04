@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
+import fr.paris.lutece.plugins.workflowcore.business.config.TaskConfig;
 
 import java.util.List;
 
@@ -43,9 +44,8 @@ import java.util.List;
  * TaskEvaluationExpertConfig
  *
  */
-public class TaskEvaluationConfig
+public class TaskEvaluationConfig extends TaskConfig
 {
-    private int _nIdTask;
     private String _strTaskTitle;
     private String _strTaskDescription;
     private String _strSummaryTitle;
@@ -56,23 +56,6 @@ public class TaskEvaluationConfig
     private boolean _bMandatoryFinalNote;
     private boolean _bAutomaticFinalNote;
     private String _strBestScoreFinalNote;
-
-    /**
-     * @return l'identifiant de la tache
-     */
-    public int getIdTask(  )
-    {
-        return _nIdTask;
-    }
-
-    /**
-     * set l'identifiant  de la tache
-     * @param idTask l'identifianty de la tache
-     */
-    public void setIdTask( int idTask )
-    {
-        _nIdTask = idTask;
-    }
 
     /**
      *

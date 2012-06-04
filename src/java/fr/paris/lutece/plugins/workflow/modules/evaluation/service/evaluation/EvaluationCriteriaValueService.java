@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.service.evaluation;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.EvaluationCriteriaValue;
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.evaluation.IEvaluationCriteriaValueDAO;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,7 @@ public class EvaluationCriteriaValueService implements IEvaluationCriteriaValueS
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void create( EvaluationCriteriaValue criteriaValue, Plugin plugin )
     {
         _evaluationCriteriaValueDAO.insert( criteriaValue, plugin );
@@ -66,7 +67,7 @@ public class EvaluationCriteriaValueService implements IEvaluationCriteriaValueS
      * {@inheritDoc}
      */
     @Override
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     public void removeByEvaluation( int nIdHistory, int nIdTask, Plugin plugin )
     {
         _evaluationCriteriaValueDAO.deleteByEvaluation( nIdHistory, nIdTask, plugin );

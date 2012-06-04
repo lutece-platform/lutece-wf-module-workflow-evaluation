@@ -34,6 +34,7 @@
 package fr.paris.lutece.plugins.workflow.modules.evaluation.service.synthesis;
 
 import fr.paris.lutece.plugins.workflow.modules.evaluation.business.synthesis.SynthesisCriteria;
+import fr.paris.lutece.plugins.workflow.modules.evaluation.service.EvaluationPlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -61,7 +62,7 @@ public interface ISynthetisCriteriaService
      * @param criteria the criteria
      * @param plugin the plugin
      */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void create( SynthesisCriteria criteria, Plugin plugin );
 
     /**
@@ -69,7 +70,7 @@ public interface ISynthetisCriteriaService
      * @param criteria the criteria
      * @param plugin the plugin
      */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void update( SynthesisCriteria criteria, Plugin plugin );
 
     /**
@@ -85,7 +86,7 @@ public interface ISynthetisCriteriaService
      * @param nIdTask the id task
      * @param plugin the plugin
      */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void removeByIdTask( int nIdTask, Plugin plugin );
 
     /**
@@ -93,6 +94,6 @@ public interface ISynthetisCriteriaService
      * @param nIdCriteria the id criteria
      * @param plugin the plugin
      */
-    @Transactional( "workflow-evaluation.transactionManager" )
+    @Transactional( EvaluationPlugin.BEAN_TRANSACTION_MANAGER )
     void remove( int nIdCriteria, Plugin plugin );
 }
