@@ -45,11 +45,11 @@ import java.util.List;
  */
 public interface ITaskEvaluationCriteriaDAO
 {
-	/**
-	 * Insert a new criteria
-	 * @param criteria the criteria
-	 * @param plugin the plugin
-	 */
+    /**
+     * Insert a new criteria
+     * @param criteria the criteria
+     * @param plugin the plugin
+     */
     void insert( TaskEvaluationCriteria criteria, Plugin plugin );
 
     /**

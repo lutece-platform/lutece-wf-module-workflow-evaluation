@@ -35,8 +35,9 @@ package fr.paris.lutece.plugins.workflow.modules.evaluation.business;
 
 import fr.paris.lutece.plugins.workflow.utils.WorkflowUtils;
 
+
 /**
- * 
+ *
  * TaskEvaluationCriteria
  *
  */

@@ -252,7 +252,7 @@ public class SynthesisCriteria
          */
         DROPDOWNLIST;
 
-        private static final String MESSAGE_PREFIX = "module.workflow.evaluation.synthesis.";
+    	private static final String MESSAGE_PREFIX = "module.workflow.evaluation.synthesis.";
 
         /**
          * Private constructor
@@ -260,7 +260,7 @@ public class SynthesisCriteria
         private Type(  )
         {
         }
-        
+
         /**
          * Gets i18n key for this type
          * @return i18n key
