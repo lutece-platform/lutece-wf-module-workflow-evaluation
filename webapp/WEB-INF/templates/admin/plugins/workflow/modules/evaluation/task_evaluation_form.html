@@ -1,51 +1,40 @@
-
- <#if config?exists>
-   <#if config.taskTitle?exists>
-		  <h2>${config.taskTitle}</h2>
-	</#if>  
+<#if config?exists>
+	<fieldset>
+   <#if config.taskTitle?exists><fieldset>${config.taskTitle}</fieldset></#if>  
 	 <#list config.evaluationsCriteria as criteria>
-		<p>
-	      <#if criteria.title?exists >
+	     <#if criteria.title?exists >
 	   		<label for="id_criteria_${config.idTask}_${criteria.idCriteria}"> ${criteria.title} <#if criteria.mandatory>*</#if>	:</label>
 	      </#if>
 	      <#if config.automaticFinalNote>
-	   	  		<input type="text" name="id_criteria_${config.idTask}_${criteria.idCriteria}" id="" size="3" value=""  maxlength="3" onchange="javascript:calcul()"/>
+			<input type="text" name="id_criteria_${config.idTask}_${criteria.idCriteria}" id="" size="3" value=""  maxlength="3" onchange="javascript:calcul()"/>
 	   	  <#else>
-	   	  		<input type="text" name="id_criteria_${config.idTask}_${criteria.idCriteria}" id="" size="3" value=""  maxlength="3"/>
+	   	  	<input type="text" name="id_criteria_${config.idTask}_${criteria.idCriteria}" id="" size="3" value=""  maxlength="3"/>
 	   	  </#if>
-	    	<#if criteria.bestScore?exists >
-	   	     	/${criteria.bestScore}
-	   	  </#if>	
-		</p>
-	 </#list>
+	    <#if criteria.bestScore?exists >
+	   	    	/${criteria.bestScore}
+	   	 </#if>	
+	</#list>
 	<#if config.summaryTitle?? && config.summaryTitle != "">
-	  	<p>
-	   		<label for="summary_${config.idTask}">${config.summaryTitle} <#if config.mandatorySummary>*</#if> :</label>
-	   	 	<textarea name="summary_${config.idTask}"  rows="4" cols="80"></textarea>	
-		</p>
+		<label for="summary_${config.idTask}">${config.summaryTitle} <#if config.mandatorySummary>*</#if> :</label>
+	 	<textarea name="summary_${config.idTask}"  rows="4" cols="80"></textarea>	
 	</#if>
-	 
 	 <#if config.finalNoteTitle?has_content >
-	 <p>
-	   		<label for="final_note_${config.idTask}">${config.finalNoteTitle} <#if config.mandatoryFinalNote>*</#if> :</label>
+		<label for="final_note_${config.idTask}">${config.finalNoteTitle} <#if config.mandatoryFinalNote>*</#if> :</label>
 	      <#if config.automaticFinalNote >
-	   	  		<input type="text" name="final_note_${config.idTask}" id="" size="3" value=""  maxlength="3" onclick="alert('#i18n{module.workflow.evaluation.warning_automatic_field}');" onchange="javascript:calcul();"/>
+	   		<input type="text" name="final_note_${config.idTask}" id="" size="3" value=""  maxlength="3" onclick="alert('#i18n{module.workflow.evaluation.warning_automatic_field}');" onchange="javascript:calcul();"/>
 	   	  <#else>
-	   	  		<input type="text" name="final_note_${config.idTask}" id="" size="3" value=""  maxlength="3"/>
+	   		<input type="text" name="final_note_${config.idTask}" id="" size="3" value=""  maxlength="3"/>
 	   	  </#if>	
 	      <#if config.automaticFinalNote >		
-		    	/${automatic_bestScoreFinalNote}
+		   	/${automatic_bestScoreFinalNote}
 		  <#else>
-		  		<#if config.bestScoreFinalNote?exists >
+				<#if config.bestScoreFinalNote?exists >
 		   	     	/${config.bestScoreFinalNote}
 		   	  	</#if>
 		  </#if>	
-	</p>
 	</#if>
-	
 		<#list config.listSynthesisCriteria as criteria>
-		<p>
-		  <label for="id_synthesis_criteria_${config.idTask}_${criteria.idCriteria}">${criteria.title} <#if criteria.mandatory>*</#if> : </label>
+			<label for="id_synthesis_criteria_${config.idTask}_${criteria.idCriteria}">${criteria.title} <#if criteria.mandatory>*</#if> : </label>
 		  <#if criteria.type?string = "TEXT">
 		 	 <input type="text" name="id_synthesis_criteria_${config.idTask}_${criteria.idCriteria}" id="" value="" />
 		  <#elseif criteria.type?string = "RADIOBUTTON">
@@ -62,15 +51,16 @@
 		  <#elseif criteria.type?string = "CHECKBOX">
 		  	<#list criteria.availableValues as value>
 		  		<#if value_index != 0>
-		  			<br />
-		  			<label>&nbsp;</label>
+		  			<label class="checkbox">
 		  		</#if>
-		  		<input type="checkbox" value="${value.title}" name="id_synthesis_criteria_${config.idTask}_${criteria.idCriteria}"/>
-		  		${value.title}&nbsp;
+					<input type="checkbox" value="${value.title}" name="id_synthesis_criteria_${config.idTask}_${criteria.idCriteria}"/>
+					${value.title}&nbsp;
+				</label>
 		  	</#list>
 		  </#if>
-		 </p>
-		</#list>
+		 
+	</#list>
+	</fieldset>
 	<script>
 		function calcul()
 		{
