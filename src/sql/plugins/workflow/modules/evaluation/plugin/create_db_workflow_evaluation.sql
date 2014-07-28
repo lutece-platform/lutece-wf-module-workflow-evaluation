@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS task_evaluation_cf;
 DROP TABLE IF EXISTS task_evaluation_criteria;
-DROP TABLE IF EXISTS task_evaluation_value; 
 DROP TABLE IF EXISTS evaluation_criteria_value;
 DROP TABLE IF EXISTS bourse_information_complementaire;
 DROP TABLE IF EXISTS evaluation_synthesis_criteria;
 DROP TABLE IF EXISTS evaluation_synthesis_criteria_value;
 DROP TABLE IF EXISTS task_evaluation_synthesis;
 DROP TABLE IF EXISTS task_evaluation_synthesis_value;
+DROP TABLE IF EXISTS task_evaluation_evaluation;
 
 
 /*==============================================================*/
