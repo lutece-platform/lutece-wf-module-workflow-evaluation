@@ -42,9 +42,11 @@
         <jiraProjectName>MODULEWORKFLOWEVALUATION</jiraProjectName>
         <jiraComponentId>10379</jiraComponentId>
     </properties>
+    
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-evaluation</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-evaluation</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/directory-form-workflow/module-workflow-evaluation</url>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-wf-module-workflow-evaluation.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-wf-module-workflow-evaluation.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-wf-module-workflow-evaluation.git</url>
     </scm>
+    
 </project>
