@@ -233,9 +233,9 @@ public class SynthesisCriteria
      * Type of the criteria.
      *
      */
-    public static enum Type
-    {
-    	/**
+    public static enum Type 
+    { 
+        /**
          * CHECKBOX has multiple available values.
          */
         CHECKBOX,
@@ -252,7 +252,7 @@ public class SynthesisCriteria
          */
         DROPDOWNLIST;
 
-    	private static final String MESSAGE_PREFIX = "module.workflow.evaluation.synthesis.";
+        private static final String MESSAGE_PREFIX = "module.workflow.evaluation.synthesis.";
 
         /**
          * Private constructor
@@ -269,5 +269,6 @@ public class SynthesisCriteria
         {
             return MESSAGE_PREFIX + this.toString(  ).toLowerCase(  );
         }
+
     }
 }
